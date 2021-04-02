@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.leaguessoccer.R;
 import com.example.leaguessoccer.interfaces.ILeaguePresenter;
 import com.example.leaguessoccer.interfaces.ILeagueView;
-import com.example.leaguessoccer.models.Team;
+import com.example.leaguessoccer.database.entity.Team;
 import com.example.leaguessoccer.presenter.LeaguePresenterImpl;
 import com.example.leaguessoccer.view.league.adapter.IOnclickTeam;
 import com.example.leaguessoccer.view.league.adapter.InfoTeamAdapter;
@@ -28,7 +29,7 @@ public class LeagueActivity extends AppCompatActivity implements ILeagueView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league);
-        presenter = new LeaguePresenterImpl(this);
+        presenter = new LeaguePresenterImpl(this,this);
         presenter.getTeams("Spanish La Liga");
         rvTeams = findViewById(R.id.rv_teams);
         infoTeamAdapter = new InfoTeamAdapter(new ArrayList<>(), new IOnclickTeam() {

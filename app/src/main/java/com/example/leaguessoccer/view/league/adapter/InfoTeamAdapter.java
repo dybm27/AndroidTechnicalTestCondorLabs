@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.leaguessoccer.R;
-import com.example.leaguessoccer.models.Team;
+import com.example.leaguessoccer.database.entity.Team;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
@@ -86,6 +86,7 @@ public class InfoTeamAdapter extends RecyclerView.Adapter<InfoTeamAdapter.ViewHo
     }
 
     public void setDataAdapter(List<Team> teams) {
+        System.out.println(teams.size());
         this.teams.clear();
         this.teams.addAll(teams);
         notifyDataSetChanged();

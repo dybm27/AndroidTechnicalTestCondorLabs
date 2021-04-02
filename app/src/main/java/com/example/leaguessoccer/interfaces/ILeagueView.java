@@ -1,6 +1,6 @@
 package com.example.leaguessoccer.interfaces;
 
-import com.example.leaguessoccer.models.Team;
+import com.example.leaguessoccer.database.entity.Team;
 
 import java.util.List;
 

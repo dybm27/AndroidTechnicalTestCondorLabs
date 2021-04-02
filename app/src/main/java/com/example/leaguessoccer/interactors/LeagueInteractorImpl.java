@@ -1,10 +1,19 @@
 package com.example.leaguessoccer.interactors;
 
 
+import android.content.Context;
+
+import androidx.room.Room;
+
 import com.example.leaguessoccer.apiconfig.RetrofitServices;
+import com.example.leaguessoccer.database.entity.League;
+import com.example.leaguessoccer.database.entity.LeagueWhitTeamList;
+import com.example.leaguessoccer.database.entity.Team;
+import com.example.leaguessoccer.database.scheme.LeagueDb;
 import com.example.leaguessoccer.interfaces.ILeagueInteractor;
 import com.example.leaguessoccer.interfaces.ILeaguePresenter;
-import com.example.leaguessoccer.models.League;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,23 +22,39 @@ import retrofit2.Response;
 public class LeagueInteractorImpl implements ILeagueInteractor {
 
     private ILeaguePresenter presenter;
+    private LeagueDb db;
 
-    public LeagueInteractorImpl(ILeaguePresenter leaguePresenter) {
+    public LeagueInteractorImpl(ILeaguePresenter leaguePresenter, Context context) {
         this.presenter = leaguePresenter;
+        this.db = Room.databaseBuilder(context,
+                LeagueDb.class, "league")
+                .fallbackToDestructiveMigration()
+                .build();
+    }
+
+    @Override
+    public List<Team> getTeamsBd(String league) {
+        presenter.initProgressBar();
+        List<LeagueWhitTeamList> lg = db.leagueDao().getLeagueWhitTeams2();
+        if (lg == null || lg.isEmpty()) {
+            return null;
+        }
+        return lg.get(0).getTeams();
     }
 
     @Override
     public void getTeams(String league) {
-        //validar si ya esta en la bd y retornar eso
-        presenter.initProgressBar();
         Call<League> call = RetrofitServices.getApiService().getTeams(league);
         call.enqueue(new Callback<League>() {
             @Override
             public void onResponse(Call<League> call, Response<League> response) {
                 presenter.cancelProgressBar();
-                if (response.isSuccessful()){
-                    presenter.showTeams(response.body());
-                }else{
+                if (response.isSuccessful()) {
+                    League l = response.body();
+                    l.setName(league);
+                    presenter.addLeagueBd(l);
+                    presenter.showTeams(l);
+                } else {
                     presenter.showToast(response.message());
                 }
             }
@@ -44,5 +69,14 @@ public class LeagueInteractorImpl implements ILeagueInteractor {
     @Override
     public void getTeam(String idTeam) {
         //obtnener equipo de la bd
+    }
+
+    @Override
+    public void addLeagueBd(League league) {
+        for (Team t : league.getTeams()) {
+            t.setNameLeague(league.getName());
+        }
+        db.leagueDao().insertLeague(league);
+        db.teamDao().insertAll(league.getTeams());
     }
 }

@@ -1,6 +1,6 @@
 package com.example.leaguessoccer.apiconfig;
 
-import com.example.leaguessoccer.models.League;
+import com.example.leaguessoccer.database.entity.League;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
