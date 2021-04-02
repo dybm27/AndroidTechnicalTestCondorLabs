@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.leaguessoccer.league.view.LeagueActivity;
+import com.example.leaguessoccer.view.league.LeagueActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
