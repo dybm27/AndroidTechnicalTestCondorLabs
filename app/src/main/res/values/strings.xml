@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Football Leagues</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="website">Website</string>
+
+    <string-array name="leagues">
+        <item>Liga Española</item>
+        <item>Bundesliga</item>
+        <item>Liga de Inglaterra</item>
+    </string-array>
+
 </resources>

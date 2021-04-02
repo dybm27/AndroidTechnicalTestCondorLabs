@@ -12,6 +12,8 @@ import com.example.leaguessoccer.database.entity.Team;
 import com.example.leaguessoccer.database.scheme.LeagueDb;
 import com.example.leaguessoccer.interfaces.ILeagueInteractor;
 import com.example.leaguessoccer.interfaces.ILeaguePresenter;
+import com.example.leaguessoccer.interfaces.ITeamInteractor;
+import com.example.leaguessoccer.interfaces.ITeamPresenter;
 
 import java.util.List;
 
@@ -19,13 +21,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LeagueInteractorImpl implements ILeagueInteractor {
+public class TeamInteractorImpl implements ITeamInteractor {
 
-    private ILeaguePresenter presenter;
+    private ITeamPresenter presenter;
     private LeagueDb db;
 
-    public LeagueInteractorImpl(ILeaguePresenter leaguePresenter, Context context) {
-        this.presenter = leaguePresenter;
+    public TeamInteractorImpl(ITeamPresenter teamPresenter, Context context) {
+        this.presenter = teamPresenter;
         this.db = Room.databaseBuilder(context,
                 LeagueDb.class, "league")
                 .fallbackToDestructiveMigration()
@@ -33,28 +35,19 @@ public class LeagueInteractorImpl implements ILeagueInteractor {
     }
 
     @Override
-    public List<Team> getTeamsBd(String league) {
-        System.out.println(league);
-        presenter.initProgressBar();
-        List<LeagueWhitTeamList> lg = db.leagueDao().getLeagueWhitTeams(league);
-        if (lg == null || lg.isEmpty()) {
-            return null;
-        }
-        return lg.get(0).getTeams();
+    public Team getTeamBd(String idTeam) {
+        return db.teamDao().findById(idTeam);
     }
 
     @Override
-    public void getTeams(String league) {
-        Call<League> call = RetrofitServices.getApiService().getTeams(league);
+    public void getNextsEvent(String idTeam) {
+        /*
+        * Call<League> call = RetrofitServices.getApiService().getNextsEvents(idTeam);
         call.enqueue(new Callback<League>() {
             @Override
             public void onResponse(Call<League> call, Response<League> response) {
                 presenter.cancelProgressBar();
                 if (response.isSuccessful()) {
-                    League l = response.body();
-                    l.setName(league);
-                    presenter.addLeagueBd(l);
-                    presenter.showTeams(l);
                 } else {
                     presenter.showToast(response.message());
                 }
@@ -64,15 +57,6 @@ public class LeagueInteractorImpl implements ILeagueInteractor {
             public void onFailure(Call<League> call, Throwable t) {
                 presenter.showToast("Error de conexion");
             }
-        });
-    }
-
-    @Override
-    public void addLeagueBd(League league) {
-        for (Team t : league.getTeams()) {
-            t.setNameLeague(league.getName());
-        }
-        db.leagueDao().insertLeague(league);
-        db.teamDao().insertAll(league.getTeams());
+        });*/
     }
 }

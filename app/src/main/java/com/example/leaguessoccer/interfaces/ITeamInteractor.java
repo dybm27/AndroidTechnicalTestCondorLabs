@@ -5,8 +5,7 @@ import com.example.leaguessoccer.database.entity.Team;
 
 import java.util.List;
 
-public interface ILeagueInteractor {
-    List<Team> getTeamsBd(String league);
-    void getTeams(String league);
-    void addLeagueBd(League league);
+public interface ITeamInteractor {
+    Team getTeamBd(String idTeam);
+    void getNextsEvent(String idTeam);
 }

@@ -48,22 +48,12 @@ public class LeaguePresenterImpl extends BasePresenter implements ILeaguePresent
     }
 
     @Override
-    public void getTeam(String idTeam) {
-        interactor.getTeam(idTeam);
-    }
-
-    @Override
     public void showTeams(League league) {
         if (!league.getTeams().isEmpty()){
             view.showTeams(league.getTeams());
         }else {
             view.showToast("Lista de equipos vacia");
         }
-    }
-
-    @Override
-    public void showTeam(Team team) {
-
     }
 
     @Override
@@ -100,13 +90,5 @@ public class LeaguePresenterImpl extends BasePresenter implements ILeaguePresent
                 view.showToast(error);
             }
         });
-    }
-
-    private boolean validateView() {
-        return view != null;
-    }
-
-    private boolean validateInteractor() {
-        return interactor != null;
     }
 }
