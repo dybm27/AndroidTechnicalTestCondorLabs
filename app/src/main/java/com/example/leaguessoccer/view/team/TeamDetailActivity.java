@@ -1,6 +1,8 @@
 package com.example.leaguessoccer.view.team;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,13 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leaguessoccer.R;
+import com.example.leaguessoccer.database.entity.Event;
 import com.example.leaguessoccer.database.entity.Team;
 import com.example.leaguessoccer.interfaces.ITeamPresenter;
 import com.example.leaguessoccer.interfaces.ITeamView;
 import com.example.leaguessoccer.presenter.TeamPresenterImpl;
+import com.example.leaguessoccer.view.team.adapter.InfoEventAdapter;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
 
@@ -31,6 +37,7 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
     private FloatingActionsMenu floatingActionsMenu;
     private LinearLayout content;
     private ProgressDialog progressDialog;
+    private RecyclerView rvEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +63,8 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
         ivBadge = findViewById(R.id.iv_badge);
         ivJersey = findViewById(R.id.iv_jersey);
         floatingActionsMenu = findViewById(R.id.menu_fab);
-        content = findViewById(R.id.content);;
+        content = findViewById(R.id.content);
+        rvEvents = findViewById(R.id.rv_events);
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Cargando...");
@@ -117,8 +125,10 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
     }
 
     @Override
-    public void showNextsEvent() {
-
+    public void showNextsEvent(List<Event> events) {
+        InfoEventAdapter adapter = new InfoEventAdapter(events);
+        rvEvents.setLayoutManager(new LinearLayoutManager(this));
+        rvEvents.setAdapter(adapter);
     }
 
     private void setupOnclik(String url, FloatingActionButton btn) {
@@ -156,6 +166,7 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
 
     @Override
     public void showToast(String message) {
+        cancelProgressBar();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

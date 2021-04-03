@@ -2,6 +2,7 @@ package com.example.leaguessoccer.presenter;
 
 import android.content.Context;
 
+import com.example.leaguessoccer.database.entity.Event;
 import com.example.leaguessoccer.database.entity.League;
 import com.example.leaguessoccer.database.entity.Team;
 import com.example.leaguessoccer.interactors.LeagueInteractorImpl;
@@ -37,7 +38,7 @@ public class TeamPresenterImpl extends BasePresenter implements ITeamPresenter {
         }, new Task<Team>() {
             @Override
             public void onComplete(Team result) {
-                view.showTeam(result);
+                showTeam(result);
                 cancelProgressBar();
             }
 
@@ -50,18 +51,18 @@ public class TeamPresenterImpl extends BasePresenter implements ITeamPresenter {
 
     @Override
     public void showTeam(Team team) {
-
+        view.showTeam(team);
     }
 
     @Override
     public void getNextsEvent(String idTeam) {
-        //initProgressBar();
-        //interactor.getNextsEvent(idTeam);
+        initProgressBar();
+        interactor.getNextsEvent(idTeam);
     }
 
     @Override
-    public void showNextsEvent() {
-        view.showNextsEvent();
+    public void showNextsEvent(List<Event> events) {
+        view.showNextsEvent(events);
     }
 
     @Override

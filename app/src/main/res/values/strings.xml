@@ -4,6 +4,10 @@
     <string name="twitter">Twitter</string>
     <string name="instagram">Instagram</string>
     <string name="website">Website</string>
+    <string name="nestEvents">Ultimos 5 encuentros:</string>
+    <string name="official_jersey">Camiseta oficial:</string>
+    <string name="description">Descripción:</string>
+    <string name="foundation_year">Año de fundación:</string>
 
     <string-array name="leagues">
         <item>Liga Española</item>

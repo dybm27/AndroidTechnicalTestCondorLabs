@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:text="NOMBRE"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -42,22 +41,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Año de fundación: "
+                    android:text="@string/foundation_year"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_year"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1986"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Descripción:"
+                android:text="@string/description"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -65,13 +64,12 @@
                 android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="jugar su barrioEFA (una Europa League), una Supercopa de España y una Supercopa de Europa. Ha militado 67 temporadas en Primera División y 13 en Segunda. El Sevilla F. C. está ubicado en la séptima posición de la clasificación histórica de la Liga Española de Fútbol.6 Fue designado por la Federación Internacional de Historia y Estadística de iales y deportivos, "
                 android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Camiseta oficial:"
+                android:text="@string/official_jersey"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -86,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Proximos encuentros:"
+                android:text="@string/nestEvents"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
