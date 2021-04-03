@@ -35,12 +35,11 @@ public class LeagueInteractorImpl implements ILeagueInteractor {
     @Override
     public List<Team> getTeamsBd(String league) {
         System.out.println(league);
-        presenter.initProgressBar();
-        List<LeagueWhitTeamList> lg = db.leagueDao().getLeagueWhitTeams(league);
-        if (lg == null || lg.isEmpty()) {
+        LeagueWhitTeamList lg = db.leagueDao().getLeagueWhitTeams(league);
+        if (lg == null) {
             return null;
         }
-        return lg.get(0).getTeams();
+        return lg.getTeams();
     }
 
     @Override
@@ -74,5 +73,9 @@ public class LeagueInteractorImpl implements ILeagueInteractor {
         }
         db.leagueDao().insertLeague(league);
         db.teamDao().insertAll(league.getTeams());
+    }
+
+    public LeagueDb getDb(){
+        return db;
     }
 }

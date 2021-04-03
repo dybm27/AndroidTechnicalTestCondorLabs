@@ -43,9 +43,9 @@ public class TeamInteractorImpl implements ITeamInteractor {
     public void getNextsEvent(String idTeam) {
         /*
         * Call<League> call = RetrofitServices.getApiService().getNextsEvents(idTeam);
-        call.enqueue(new Callback<League>() {
+        call.enqueue(new Callback<List<Event>>() {
             @Override
-            public void onResponse(Call<League> call, Response<League> response) {
+            public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 presenter.cancelProgressBar();
                 if (response.isSuccessful()) {
                 } else {
@@ -54,7 +54,7 @@ public class TeamInteractorImpl implements ITeamInteractor {
             }
 
             @Override
-            public void onFailure(Call<League> call, Throwable t) {
+            public void onFailure(Call<List<Event>> call, Throwable t) {
                 presenter.showToast("Error de conexion");
             }
         });*/

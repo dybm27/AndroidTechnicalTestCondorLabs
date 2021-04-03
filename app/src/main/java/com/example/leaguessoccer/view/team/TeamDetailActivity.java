@@ -2,6 +2,7 @@ package com.example.leaguessoccer.view.team;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.leaguessoccer.R;
 import com.example.leaguessoccer.database.entity.Team;
@@ -28,6 +30,7 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
     private String idTeam = "";
     private FloatingActionsMenu floatingActionsMenu;
     private LinearLayout content;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +56,10 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
         ivBadge = findViewById(R.id.iv_badge);
         ivJersey = findViewById(R.id.iv_jersey);
         floatingActionsMenu = findViewById(R.id.menu_fab);
-        content = findViewById(R.id.content);
+        content = findViewById(R.id.content);;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Cargando...");
     }
 
     @Override
@@ -139,16 +145,17 @@ public class TeamDetailActivity extends AppCompatActivity implements ITeamView {
 
     @Override
     public void initProgressBar() {
-
+        cancelProgressBar();
+        progressDialog.show();
     }
 
     @Override
     public void cancelProgressBar() {
-
+        if (progressDialog.isShowing()) progressDialog.dismiss();
     }
 
     @Override
     public void showToast(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

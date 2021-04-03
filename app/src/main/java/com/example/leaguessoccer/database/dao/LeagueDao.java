@@ -28,5 +28,5 @@ public interface LeagueDao {
 
     @Transaction
     @Query("SELECT * FROM league WHERE name LIKE :name")
-    List<LeagueWhitTeamList> getLeagueWhitTeams(String name);
+    LeagueWhitTeamList getLeagueWhitTeams(String name);
 }

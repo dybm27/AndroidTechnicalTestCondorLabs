@@ -19,11 +19,12 @@ public class LeaguePresenterImpl extends BasePresenter implements ILeaguePresent
 
     public LeaguePresenterImpl(ILeagueView leagueView, Context context) {
         view = leagueView;
-        interactor = new LeagueInteractorImpl(this,context);
+        interactor = new LeagueInteractorImpl(this, context);
     }
 
     @Override
     public void getTeams(String league) {
+        initProgressBar();
         executeTask(new Callable<List<Team>>() {
             @Override
             public List<Team> call() throws Exception {
@@ -32,43 +33,43 @@ public class LeaguePresenterImpl extends BasePresenter implements ILeaguePresent
         }, new Task<List<Team>>() {
             @Override
             public void onComplete(List<Team> result) {
-               if (result!=null){
-                   view.showTeams(result);
-                   view.cancelProgressBar();
-               }else {
-                   interactor.getTeams(league);
-               }
+                if (result != null) {
+                    view.showTeams(result);
+                    cancelProgressBar();
+                } else {
+                    interactor.getTeams(league);
+                }
             }
 
             @Override
             public void onError(String error) {
-                view.showToast(error);
+                showToast(error);
             }
         });
     }
 
     @Override
     public void showTeams(League league) {
-        if (!league.getTeams().isEmpty()){
+        if (!league.getTeams().isEmpty()) {
             view.showTeams(league.getTeams());
-        }else {
-            view.showToast("Lista de equipos vacia");
+        } else {
+            showToast("Lista de equipos vacia");
         }
     }
 
     @Override
     public void initProgressBar() {
-
+        view.initProgressBar();
     }
 
     @Override
     public void cancelProgressBar() {
-
+        view.cancelProgressBar();
     }
 
     @Override
-    public void showToast(String message){
-
+    public void showToast(String message) {
+        view.showToast(message);
     }
 
     @Override
@@ -87,7 +88,7 @@ public class LeaguePresenterImpl extends BasePresenter implements ILeaguePresent
 
             @Override
             public void onError(String error) {
-                view.showToast(error);
+                showToast(error);
             }
         });
     }

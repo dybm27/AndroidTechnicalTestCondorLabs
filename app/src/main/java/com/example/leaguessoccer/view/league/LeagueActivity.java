@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,12 +30,16 @@ public class LeagueActivity extends AppCompatActivity implements ILeagueView {
     private RecyclerView rvTeams;
     private InfoTeamAdapter infoTeamAdapter;
     private Spinner spLeagues;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league);
         presenter = new LeaguePresenterImpl(this, this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setTitle("Cargando...");
         rvTeams = findViewById(R.id.rv_teams);
         spLeagues = findViewById(R.id.sp_leagues);
         infoTeamAdapter = new InfoTeamAdapter(new ArrayList<>(), new IOnclickTeam() {
@@ -46,7 +51,6 @@ public class LeagueActivity extends AppCompatActivity implements ILeagueView {
         rvTeams.setLayoutManager(new LinearLayoutManager(this));
         rvTeams.setAdapter(infoTeamAdapter);
         setupOnItemSelected();
-        filterLeague(spLeagues.getSelectedItemPosition());
     }
 
     private void setupOnItemSelected() {
@@ -90,12 +94,14 @@ public class LeagueActivity extends AppCompatActivity implements ILeagueView {
 
     @Override
     public void initProgressBar() {
+        cancelProgressBar();
+        progressDialog.show();
 
     }
 
     @Override
     public void cancelProgressBar() {
-
+        if (progressDialog.isShowing()) progressDialog.dismiss();
     }
 
     @Override

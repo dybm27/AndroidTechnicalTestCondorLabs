@@ -23,12 +23,12 @@ public class TeamPresenterImpl extends BasePresenter implements ITeamPresenter {
 
     public TeamPresenterImpl(ITeamView teamView, Context context) {
         view = teamView;
-        interactor = new TeamInteractorImpl(this,context);
+        interactor = new TeamInteractorImpl(this, context);
     }
 
     @Override
     public void getTeam(String idTeam) {
-        view.initProgressBar();
+        initProgressBar();
         executeTask(new Callable<Team>() {
             @Override
             public Team call() throws Exception {
@@ -38,7 +38,7 @@ public class TeamPresenterImpl extends BasePresenter implements ITeamPresenter {
             @Override
             public void onComplete(Team result) {
                 view.showTeam(result);
-                view.cancelProgressBar();
+                cancelProgressBar();
             }
 
             @Override
@@ -55,26 +55,27 @@ public class TeamPresenterImpl extends BasePresenter implements ITeamPresenter {
 
     @Override
     public void getNextsEvent(String idTeam) {
-
+        //initProgressBar();
+        //interactor.getNextsEvent(idTeam);
     }
 
     @Override
     public void showNextsEvent() {
-
+        view.showNextsEvent();
     }
 
     @Override
     public void initProgressBar() {
-
+        view.initProgressBar();
     }
 
     @Override
     public void cancelProgressBar() {
-
+        view.cancelProgressBar();
     }
 
     @Override
-    public void showToast(String message){
-
+    public void showToast(String message) {
+        view.showToast(message);
     }
 }
