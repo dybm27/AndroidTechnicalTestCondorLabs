@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ResponseEvents implements Serializable {
-    private List<Event> results = null;
+    private List<Event> events = null;
 
     public List<Event> getResults() {
-        return results;
+        return events;
     }
-    public void setResults(List<Event> results) {
-        this.results = results;
+    public void setResults(List<Event> events) {
+        this.events = events;
     }
 }

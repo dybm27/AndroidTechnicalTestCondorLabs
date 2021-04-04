@@ -11,6 +11,6 @@ public interface TheSportsDBApi {
     @GET("search_all_teams.php")
     Call<League> getTeams(@Query("l") String league);
 
-    @GET("eventslast.php")
+    @GET("eventsnext.php")
     Call<ResponseEvents> getNextsEvents(@Query("id") String idTeam);
 }

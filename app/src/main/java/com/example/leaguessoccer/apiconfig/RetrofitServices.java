@@ -16,7 +16,7 @@ public class RetrofitServices {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
 
-        String baseUrl = "https://www.thesportsdb.com/api/v1/json/1/";
+        String baseUrl = "https://www.thesportsdb.com/api/v1/json/40130162/";
 
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()
